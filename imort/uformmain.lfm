@@ -1,0 +1,1378 @@
+object FormMain: TFormMain
+  Left = 299
+  Height = 617
+  Top = 119
+  Width = 707
+  Caption = 'PasOpenAPI generator'
+  ClientHeight = 617
+  ClientWidth = 707
+  OnShow = FormShow
+  LCLVersion = '2.3.0.0'
+  object ToolBar1: TToolBar
+    Left = 0
+    Height = 26
+    Top = 0
+    Width = 707
+    Caption = 'ToolBar1'
+    ShowCaptions = True
+    TabOrder = 0
+    object ToolButton1: TToolButton
+      Left = 1
+      Top = 2
+      Action = ActionOpenSchema
+    end
+    object ToolButton2: TToolButton
+      Left = 82
+      Top = 2
+      Action = ActionGenerate
+    end
+    object ToolButton4: TToolButton
+      Left = 137
+      Top = 2
+      Action = ActionLoadProject
+    end
+    object ToolButton5: TToolButton
+      Left = 243
+      Top = 2
+      Action = ActionSaveProject
+    end
+  end
+  object StatusBar1: TStatusBar
+    Left = 0
+    Height = 23
+    Top = 594
+    Width = 707
+    Panels = <>
+  end
+  object PageControl1: TPageControl
+    Left = 0
+    Height = 478
+    Top = 26
+    Width = 707
+    ActivePage = TabSheetGeneral
+    Align = alClient
+    TabIndex = 0
+    TabOrder = 2
+    object TabSheetGeneral: TTabSheet
+      Caption = 'General'
+      ClientHeight = 450
+      ClientWidth = 699
+      object Label1: TLabel
+        Left = 15
+        Height = 15
+        Top = 16
+        Width = 48
+        Caption = 'Base URL'
+        Color = clDefault
+        ParentColor = False
+      end
+      object EditBaseURL: TEdit
+        Left = 68
+        Height = 23
+        Top = 13
+        Width = 152
+        TabOrder = 0
+      end
+    end
+    object TabSheetDef: TTabSheet
+      Caption = 'Definitions'
+      ClientHeight = 450
+      ClientWidth = 699
+      object DBGrid1: TDBGrid
+        Left = 0
+        Height = 241
+        Top = 26
+        Width = 699
+        Align = alClient
+        Color = clWindow
+        Columns = <        
+          item
+            Title.Caption = 'Id'
+            Width = 50
+            FieldName = 'Id'
+          end        
+          item
+            Title.Caption = 'Active'
+            Width = 40
+            FieldName = 'Active'
+          end        
+          item
+            Title.Caption = 'Name'
+            Width = 400
+            FieldName = 'Name'
+          end        
+          item
+            Title.Caption = 'Type'
+            Width = 70
+            FieldName = 'Type'
+          end        
+          item
+            Title.Caption = 'Format'
+            Width = 70
+            FieldName = 'Format'
+          end        
+          item
+            Title.Caption = 'PasName'
+            Width = 100
+            FieldName = 'PasName'
+          end        
+          item
+            Title.Caption = 'Description'
+            FieldName = 'Description'
+          end>
+        DataSource = DS_DDefinitions
+        TabOrder = 0
+      end
+      object DBGrid2: TDBGrid
+        Left = 0
+        Height = 178
+        Top = 272
+        Width = 699
+        Align = alBottom
+        Color = clWindow
+        Columns = <        
+          item
+            Title.Caption = 'DefinitionId'
+            Width = 50
+            FieldName = 'DefinitionId'
+          end        
+          item
+            Title.Caption = 'Active'
+            Width = 40
+            FieldName = 'Active'
+          end        
+          item
+            Title.Caption = 'Name'
+            Width = 160
+            FieldName = 'Name'
+          end        
+          item
+            Title.Caption = 'Type'
+            Width = 70
+            FieldName = 'Type'
+          end        
+          item
+            Title.Caption = 'Format'
+            Width = 70
+            FieldName = 'Format'
+          end        
+          item
+            Title.Caption = 'Reference'
+            Width = 300
+            FieldName = 'Reference'
+          end        
+          item
+            Title.Caption = 'ArrayType'
+            Width = 70
+            FieldName = 'ArrayType'
+          end        
+          item
+            Title.Caption = 'ArrayFormat'
+            Width = 70
+            FieldName = 'ArrayFormat'
+          end        
+          item
+            Title.Caption = 'ArrayReference'
+            Width = 300
+            FieldName = 'ArrayReference'
+          end        
+          item
+            Title.Caption = 'ReadOnly'
+            Width = 40
+            FieldName = 'ReadOnly'
+          end        
+          item
+            Title.Caption = 'Description'
+            FieldName = 'Description'
+          end>
+        DataSource = DS_DDefinitionFields
+        TabOrder = 1
+      end
+      object Splitter1: TSplitter
+        Cursor = crVSplit
+        Left = 0
+        Height = 5
+        Top = 267
+        Width = 699
+        Align = alBottom
+        ResizeAnchor = akBottom
+      end
+      object ToolBar2: TToolBar
+        Left = 0
+        Height = 26
+        Top = 0
+        Width = 699
+        Caption = 'ToolBar2'
+        ShowCaptions = True
+        TabOrder = 3
+        object ToolButton3: TToolButton
+          Left = 1
+          Top = 2
+          Action = ActionDefinitionReplace
+        end
+      end
+    end
+    object TabSheetPaths: TTabSheet
+      Caption = 'Paths'
+      ClientHeight = 450
+      ClientWidth = 699
+      object DBGrid3: TDBGrid
+        Left = 0
+        Height = 307
+        Top = 0
+        Width = 200
+        Align = alLeft
+        Color = clWindow
+        Columns = <        
+          item
+            Title.Caption = 'Id'
+            Width = 50
+            FieldName = 'Id'
+          end        
+          item
+            Title.Caption = 'Active'
+            Width = 30
+            FieldName = 'Active'
+          end        
+          item
+            Title.Caption = 'Name'
+            Width = 80
+            FieldName = 'Name'
+          end        
+          item
+            Title.Caption = 'PasName'
+            Width = 80
+            FieldName = 'PasName'
+          end>
+        DataSource = DS_DTags
+        TabOrder = 0
+      end
+      object Splitter2: TSplitter
+        Left = 200
+        Height = 307
+        Top = 0
+        Width = 5
+      end
+      object Panel1: TPanel
+        Left = 0
+        Height = 138
+        Top = 312
+        Width = 699
+        Align = alBottom
+        Caption = 'Panel1'
+        ClientHeight = 138
+        ClientWidth = 699
+        TabOrder = 2
+        object DBGrid6: TDBGrid
+          Left = 1
+          Height = 136
+          Top = 1
+          Width = 303
+          Align = alLeft
+          Color = clWindow
+          Columns = <          
+            item
+              Title.Caption = 'OperationId'
+              Width = 40
+              FieldName = 'OperationId'
+            end          
+            item
+              Title.Caption = 'Active'
+              Width = 30
+              FieldName = 'Active'
+            end          
+            item
+              Title.Caption = 'Name'
+              Width = 120
+              FieldName = 'Name'
+            end          
+            item
+              Title.Caption = 'Required'
+              Width = 30
+              FieldName = 'Required'
+            end          
+            item
+              Title.Caption = 'In'
+              Width = 40
+              FieldName = 'In'
+            end          
+            item
+              Title.Caption = 'Type'
+              Width = 80
+              FieldName = 'Type'
+            end          
+            item
+              Title.Caption = 'Format'
+              Width = 80
+              FieldName = 'Format'
+            end          
+            item
+              Title.Caption = 'Reference'
+              Width = 200
+              FieldName = 'Reference'
+            end>
+          DataSource = DS_DParams
+          TabOrder = 0
+        end
+        object Splitter4: TSplitter
+          Left = 304
+          Height = 136
+          Top = 1
+          Width = 5
+        end
+        object DBGrid7: TDBGrid
+          Left = 309
+          Height = 136
+          Top = 1
+          Width = 389
+          Align = alClient
+          Color = clWindow
+          Columns = <          
+            item
+              Title.Caption = 'OperationId'
+              Width = 40
+              FieldName = 'OperationId'
+            end          
+            item
+              Title.Caption = 'Active'
+              Width = 30
+              FieldName = 'Active'
+            end          
+            item
+              Title.Caption = 'Response'
+              Width = 40
+              FieldName = 'Response'
+            end          
+            item
+              Title.Caption = 'Type'
+              Width = 80
+              FieldName = 'Type'
+            end          
+            item
+              Title.Caption = 'Format'
+              Width = 80
+              FieldName = 'Format'
+            end          
+            item
+              Title.Caption = 'Reference'
+              Width = 120
+              FieldName = 'Reference'
+            end          
+            item
+              Title.Caption = 'ArrayType'
+              Width = 80
+              FieldName = 'ArrayType'
+            end          
+            item
+              Title.Caption = 'ArrayFormat'
+              Width = 80
+              FieldName = 'ArrayFormat'
+            end          
+            item
+              Title.Caption = 'ArrayReference'
+              Width = 120
+              FieldName = 'ArrayReference'
+            end>
+          DataSource = DS_DResponses
+          TabOrder = 2
+        end
+      end
+      object Panel2: TPanel
+        Left = 205
+        Height = 307
+        Top = 0
+        Width = 494
+        Align = alClient
+        Caption = 'Panel2'
+        ClientHeight = 307
+        ClientWidth = 494
+        TabOrder = 3
+        object DBGrid4: TDBGrid
+          Left = 1
+          Height = 183
+          Top = 1
+          Width = 492
+          Align = alClient
+          Color = clWindow
+          Columns = <          
+            item
+              Title.Caption = 'Id'
+              Width = 40
+              FieldName = 'Id'
+            end          
+            item
+              Title.Caption = 'TagId'
+              Width = 40
+              FieldName = 'TagId'
+            end          
+            item
+              Title.Caption = 'Active'
+              Width = 30
+              FieldName = 'Active'
+            end          
+            item
+              Title.Caption = 'Path'
+              Width = 300
+              FieldName = 'Path'
+            end          
+            item
+              Title.Caption = 'PasName'
+              Width = 100
+              FieldName = 'PasName'
+            end>
+          DataSource = DS_DPaths
+          TabOrder = 0
+        end
+        object DBGrid5: TDBGrid
+          Left = 1
+          Height = 117
+          Top = 189
+          Width = 492
+          Align = alBottom
+          Color = clWindow
+          Columns = <          
+            item
+              Title.Caption = 'Id'
+              Width = 40
+              FieldName = 'Id'
+            end          
+            item
+              Title.Caption = 'PathId'
+              Width = 40
+              FieldName = 'PathId'
+            end          
+            item
+              Title.Caption = 'Active'
+              Width = 30
+              FieldName = 'Active'
+            end          
+            item
+              Title.Caption = 'Operation'
+              FieldName = 'Operation'
+            end          
+            item
+              Title.Caption = 'OperationId'
+              Width = 120
+              FieldName = 'OperationId'
+            end          
+            item
+              Title.Caption = 'Summary'
+              Width = 300
+              FieldName = 'Summary'
+            end>
+          DataSource = DS_DOperations
+          TabOrder = 1
+        end
+        object Splitter5: TSplitter
+          Cursor = crVSplit
+          Left = 1
+          Height = 5
+          Top = 184
+          Width = 492
+          Align = alBottom
+          ResizeAnchor = akBottom
+        end
+      end
+      object Splitter3: TSplitter
+        Cursor = crVSplit
+        Left = 0
+        Height = 5
+        Top = 307
+        Width = 699
+        Align = alBottom
+        ResizeAnchor = akBottom
+      end
+    end
+    object TabSheetOut: TTabSheet
+      Caption = 'Output'
+      ClientHeight = 450
+      ClientWidth = 699
+      inline SynEditOut: TSynEdit
+        Left = 0
+        Height = 424
+        Top = 26
+        Width = 699
+        Align = alClient
+        Font.Height = -13
+        Font.Name = 'Courier New'
+        Font.Pitch = fpFixed
+        Font.Quality = fqNonAntialiased
+        ParentColor = False
+        ParentFont = False
+        TabOrder = 0
+        Gutter.Width = 57
+        Gutter.MouseActions = <>
+        RightGutter.Width = 0
+        RightGutter.MouseActions = <>
+        Highlighter = SynFreePascalSyn1
+        Keystrokes = <        
+          item
+            Command = ecUp
+            ShortCut = 38
+          end        
+          item
+            Command = ecSelUp
+            ShortCut = 8230
+          end        
+          item
+            Command = ecScrollUp
+            ShortCut = 16422
+          end        
+          item
+            Command = ecDown
+            ShortCut = 40
+          end        
+          item
+            Command = ecSelDown
+            ShortCut = 8232
+          end        
+          item
+            Command = ecScrollDown
+            ShortCut = 16424
+          end        
+          item
+            Command = ecLeft
+            ShortCut = 37
+          end        
+          item
+            Command = ecSelLeft
+            ShortCut = 8229
+          end        
+          item
+            Command = ecWordLeft
+            ShortCut = 16421
+          end        
+          item
+            Command = ecSelWordLeft
+            ShortCut = 24613
+          end        
+          item
+            Command = ecRight
+            ShortCut = 39
+          end        
+          item
+            Command = ecSelRight
+            ShortCut = 8231
+          end        
+          item
+            Command = ecWordRight
+            ShortCut = 16423
+          end        
+          item
+            Command = ecSelWordRight
+            ShortCut = 24615
+          end        
+          item
+            Command = ecPageDown
+            ShortCut = 34
+          end        
+          item
+            Command = ecSelPageDown
+            ShortCut = 8226
+          end        
+          item
+            Command = ecPageBottom
+            ShortCut = 16418
+          end        
+          item
+            Command = ecSelPageBottom
+            ShortCut = 24610
+          end        
+          item
+            Command = ecPageUp
+            ShortCut = 33
+          end        
+          item
+            Command = ecSelPageUp
+            ShortCut = 8225
+          end        
+          item
+            Command = ecPageTop
+            ShortCut = 16417
+          end        
+          item
+            Command = ecSelPageTop
+            ShortCut = 24609
+          end        
+          item
+            Command = ecLineStart
+            ShortCut = 36
+          end        
+          item
+            Command = ecSelLineStart
+            ShortCut = 8228
+          end        
+          item
+            Command = ecEditorTop
+            ShortCut = 16420
+          end        
+          item
+            Command = ecSelEditorTop
+            ShortCut = 24612
+          end        
+          item
+            Command = ecLineEnd
+            ShortCut = 35
+          end        
+          item
+            Command = ecSelLineEnd
+            ShortCut = 8227
+          end        
+          item
+            Command = ecEditorBottom
+            ShortCut = 16419
+          end        
+          item
+            Command = ecSelEditorBottom
+            ShortCut = 24611
+          end        
+          item
+            Command = ecToggleMode
+            ShortCut = 45
+          end        
+          item
+            Command = ecCopy
+            ShortCut = 16429
+          end        
+          item
+            Command = ecPaste
+            ShortCut = 8237
+          end        
+          item
+            Command = ecDeleteChar
+            ShortCut = 46
+          end        
+          item
+            Command = ecCut
+            ShortCut = 8238
+          end        
+          item
+            Command = ecDeleteLastChar
+            ShortCut = 8
+          end        
+          item
+            Command = ecDeleteLastChar
+            ShortCut = 8200
+          end        
+          item
+            Command = ecDeleteLastWord
+            ShortCut = 16392
+          end        
+          item
+            Command = ecUndo
+            ShortCut = 32776
+          end        
+          item
+            Command = ecRedo
+            ShortCut = 40968
+          end        
+          item
+            Command = ecLineBreak
+            ShortCut = 13
+          end        
+          item
+            Command = ecSelectAll
+            ShortCut = 16449
+          end        
+          item
+            Command = ecCopy
+            ShortCut = 16451
+          end        
+          item
+            Command = ecBlockIndent
+            ShortCut = 24649
+          end        
+          item
+            Command = ecLineBreak
+            ShortCut = 16461
+          end        
+          item
+            Command = ecInsertLine
+            ShortCut = 16462
+          end        
+          item
+            Command = ecDeleteWord
+            ShortCut = 16468
+          end        
+          item
+            Command = ecBlockUnindent
+            ShortCut = 24661
+          end        
+          item
+            Command = ecPaste
+            ShortCut = 16470
+          end        
+          item
+            Command = ecCut
+            ShortCut = 16472
+          end        
+          item
+            Command = ecDeleteLine
+            ShortCut = 16473
+          end        
+          item
+            Command = ecDeleteEOL
+            ShortCut = 24665
+          end        
+          item
+            Command = ecUndo
+            ShortCut = 16474
+          end        
+          item
+            Command = ecRedo
+            ShortCut = 24666
+          end        
+          item
+            Command = ecGotoMarker0
+            ShortCut = 16432
+          end        
+          item
+            Command = ecGotoMarker1
+            ShortCut = 16433
+          end        
+          item
+            Command = ecGotoMarker2
+            ShortCut = 16434
+          end        
+          item
+            Command = ecGotoMarker3
+            ShortCut = 16435
+          end        
+          item
+            Command = ecGotoMarker4
+            ShortCut = 16436
+          end        
+          item
+            Command = ecGotoMarker5
+            ShortCut = 16437
+          end        
+          item
+            Command = ecGotoMarker6
+            ShortCut = 16438
+          end        
+          item
+            Command = ecGotoMarker7
+            ShortCut = 16439
+          end        
+          item
+            Command = ecGotoMarker8
+            ShortCut = 16440
+          end        
+          item
+            Command = ecGotoMarker9
+            ShortCut = 16441
+          end        
+          item
+            Command = ecSetMarker0
+            ShortCut = 24624
+          end        
+          item
+            Command = ecSetMarker1
+            ShortCut = 24625
+          end        
+          item
+            Command = ecSetMarker2
+            ShortCut = 24626
+          end        
+          item
+            Command = ecSetMarker3
+            ShortCut = 24627
+          end        
+          item
+            Command = ecSetMarker4
+            ShortCut = 24628
+          end        
+          item
+            Command = ecSetMarker5
+            ShortCut = 24629
+          end        
+          item
+            Command = ecSetMarker6
+            ShortCut = 24630
+          end        
+          item
+            Command = ecSetMarker7
+            ShortCut = 24631
+          end        
+          item
+            Command = ecSetMarker8
+            ShortCut = 24632
+          end        
+          item
+            Command = ecSetMarker9
+            ShortCut = 24633
+          end        
+          item
+            Command = EcFoldLevel1
+            ShortCut = 41009
+          end        
+          item
+            Command = EcFoldLevel2
+            ShortCut = 41010
+          end        
+          item
+            Command = EcFoldLevel3
+            ShortCut = 41011
+          end        
+          item
+            Command = EcFoldLevel4
+            ShortCut = 41012
+          end        
+          item
+            Command = EcFoldLevel5
+            ShortCut = 41013
+          end        
+          item
+            Command = EcFoldLevel6
+            ShortCut = 41014
+          end        
+          item
+            Command = EcFoldLevel7
+            ShortCut = 41015
+          end        
+          item
+            Command = EcFoldLevel8
+            ShortCut = 41016
+          end        
+          item
+            Command = EcFoldLevel9
+            ShortCut = 41017
+          end        
+          item
+            Command = EcFoldLevel0
+            ShortCut = 41008
+          end        
+          item
+            Command = EcFoldCurrent
+            ShortCut = 41005
+          end        
+          item
+            Command = EcUnFoldCurrent
+            ShortCut = 41003
+          end        
+          item
+            Command = EcToggleMarkupWord
+            ShortCut = 32845
+          end        
+          item
+            Command = ecNormalSelect
+            ShortCut = 24654
+          end        
+          item
+            Command = ecColumnSelect
+            ShortCut = 24643
+          end        
+          item
+            Command = ecLineSelect
+            ShortCut = 24652
+          end        
+          item
+            Command = ecTab
+            ShortCut = 9
+          end        
+          item
+            Command = ecShiftTab
+            ShortCut = 8201
+          end        
+          item
+            Command = ecMatchBracket
+            ShortCut = 24642
+          end        
+          item
+            Command = ecColSelUp
+            ShortCut = 40998
+          end        
+          item
+            Command = ecColSelDown
+            ShortCut = 41000
+          end        
+          item
+            Command = ecColSelLeft
+            ShortCut = 40997
+          end        
+          item
+            Command = ecColSelRight
+            ShortCut = 40999
+          end        
+          item
+            Command = ecColSelPageDown
+            ShortCut = 40994
+          end        
+          item
+            Command = ecColSelPageBottom
+            ShortCut = 57378
+          end        
+          item
+            Command = ecColSelPageUp
+            ShortCut = 40993
+          end        
+          item
+            Command = ecColSelPageTop
+            ShortCut = 57377
+          end        
+          item
+            Command = ecColSelLineStart
+            ShortCut = 40996
+          end        
+          item
+            Command = ecColSelLineEnd
+            ShortCut = 40995
+          end        
+          item
+            Command = ecColSelEditorTop
+            ShortCut = 57380
+          end        
+          item
+            Command = ecColSelEditorBottom
+            ShortCut = 57379
+          end>
+        MouseActions = <>
+        MouseTextActions = <>
+        MouseSelActions = <>
+        Lines.Strings = (
+          'SynEditOut'
+        )
+        VisibleSpecialChars = [vscSpace, vscTabAtLast]
+        SelectedColor.BackPriority = 50
+        SelectedColor.ForePriority = 50
+        SelectedColor.FramePriority = 50
+        SelectedColor.BoldPriority = 50
+        SelectedColor.ItalicPriority = 50
+        SelectedColor.UnderlinePriority = 50
+        SelectedColor.StrikeOutPriority = 50
+        BracketHighlightStyle = sbhsBoth
+        BracketMatchColor.Background = clNone
+        BracketMatchColor.Foreground = clNone
+        BracketMatchColor.Style = [fsBold]
+        FoldedCodeColor.Background = clNone
+        FoldedCodeColor.Foreground = clGray
+        FoldedCodeColor.FrameColor = clGray
+        MouseLinkColor.Background = clNone
+        MouseLinkColor.Foreground = clBlue
+        LineHighlightColor.Background = clNone
+        LineHighlightColor.Foreground = clNone
+        inline SynLeftGutterPartList1: TSynGutterPartList
+          object SynGutterMarks1: TSynGutterMarks
+            Width = 24
+            MouseActions = <>
+          end
+          object SynGutterLineNumber1: TSynGutterLineNumber
+            Width = 17
+            MouseActions = <>
+            MarkupInfo.Background = clBtnFace
+            MarkupInfo.Foreground = clNone
+            DigitCount = 2
+            ShowOnlyLineNumbersMultiplesOf = 1
+            ZeroStart = False
+            LeadingZeros = False
+          end
+          object SynGutterChanges1: TSynGutterChanges
+            Width = 4
+            MouseActions = <>
+            ModifiedColor = 59900
+            SavedColor = clGreen
+          end
+          object SynGutterSeparator1: TSynGutterSeparator
+            Width = 2
+            MouseActions = <>
+            MarkupInfo.Background = clWhite
+            MarkupInfo.Foreground = clGray
+          end
+          object SynGutterCodeFolding1: TSynGutterCodeFolding
+            MouseActions = <>
+            MarkupInfo.Background = clNone
+            MarkupInfo.Foreground = clGray
+            MouseActionsExpanded = <>
+            MouseActionsCollapsed = <>
+          end
+        end
+      end
+      object ToolBar3: TToolBar
+        Left = 0
+        Height = 26
+        Top = 0
+        Width = 699
+        Caption = 'ToolBar3'
+        TabOrder = 1
+      end
+    end
+  end
+  object MemoDebug: TMemo
+    Left = 0
+    Height = 90
+    Top = 504
+    Width = 707
+    Align = alBottom
+    Lines.Strings = (
+      'MemoDebug'
+    )
+    TabOrder = 3
+  end
+  object DDefinitions: TBufDataset
+    FieldDefs = <    
+      item
+        Name = 'Id'
+        DataType = ftInteger
+      end    
+      item
+        Name = 'Active'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'Name'
+        DataType = ftString
+        Size = 512
+      end    
+      item
+        Name = 'Description'
+        DataType = ftString
+        Size = 1024
+      end    
+      item
+        Name = 'Type'
+        DataType = ftString
+        Size = 255
+      end    
+      item
+        Name = 'Format'
+        DataType = ftString
+        Size = 255
+      end    
+      item
+        Name = 'PasName'
+        DataType = ftString
+        Size = 255
+      end>
+    Left = 74
+    Top = 144
+  end
+  object DDefinitionFields: TBufDataset
+    FieldDefs = <    
+      item
+        Name = 'DefinitionId'
+        DataType = ftInteger
+      end    
+      item
+        Name = 'Active'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'Name'
+        DataType = ftString
+        Size = 512
+      end    
+      item
+        Name = 'Type'
+        DataType = ftString
+        Size = 255
+      end    
+      item
+        Name = 'Format'
+        DataType = ftString
+        Size = 255
+      end    
+      item
+        Name = 'Reference'
+        DataType = ftString
+        Size = 512
+      end    
+      item
+        Name = 'Description'
+        DataType = ftString
+        Size = 1024
+      end    
+      item
+        Name = 'ReadOnly'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ArrayType'
+        DataType = ftString
+        Size = 255
+      end    
+      item
+        Name = 'ArrayFormat'
+        DataType = ftString
+        Size = 255
+      end    
+      item
+        Name = 'ArrayReference'
+        DataType = ftString
+        Size = 512
+      end>
+    Filtered = True
+    Left = 112
+    Top = 144
+  end
+  object ActionList1: TActionList
+    Left = 88
+    Top = 88
+    object ActionOpenSchema: TAction
+      Caption = 'Open schema'
+      OnExecute = ActionOpenSchemaExecute
+    end
+    object ActionGenerate: TAction
+      Caption = 'Generate'
+      OnExecute = ActionGenerateExecute
+    end
+    object ActionDefinitionReplace: TAction
+      Caption = 'Replace...'
+      OnExecute = ActionDefinitionReplaceExecute
+    end
+    object ActionSaveProject: TAction
+      Caption = 'ActionSaveProject'
+      OnExecute = ActionSaveProjectExecute
+    end
+    object ActionLoadProject: TAction
+      Caption = 'ActionLoadProject'
+      OnExecute = ActionLoadProjectExecute
+    end
+  end
+  object OpenDialogSchema: TOpenDialog
+    Filter = 'JSON files (*.json)|*.json|All files|*.*'
+    Left = 160
+    Top = 88
+  end
+  object DS_DDefinitions: TDataSource
+    DataSet = DDefinitions
+    OnDataChange = DS_DDefinitionsDataChange
+    Left = 74
+    Top = 192
+  end
+  object DS_DDefinitionFields: TDataSource
+    DataSet = DDefinitionFields
+    Left = 112
+    Top = 192
+  end
+  object SynFreePascalSyn1: TSynFreePascalSyn
+    Enabled = False
+    CompilerMode = pcmObjFPC
+    NestedComments = True
+    TypeHelpers = False
+    Left = 136
+    Top = 281
+  end
+  object ReplaceDialog1: TReplaceDialog
+    Options = [frDown, frReplaceAll, frHidePromptOnReplace]
+    OnFind = ReplaceDialog1FindDef
+    OnReplace = ReplaceDialog1ReplaceDef
+    Left = 200
+    Top = 88
+  end
+  object DTags: TBufDataset
+    FieldDefs = <    
+      item
+        Name = 'Id'
+        DataType = ftInteger
+      end    
+      item
+        Name = 'Active'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'Name'
+        DataType = ftString
+        Size = 255
+      end    
+      item
+        Name = 'PasName'
+        DataType = ftString
+        Size = 255
+      end>
+    Left = 248
+    Top = 144
+  end
+  object DPaths: TBufDataset
+    FieldDefs = <    
+      item
+        Name = 'Id'
+        DataType = ftInteger
+      end    
+      item
+        Name = 'TagId'
+        DataType = ftInteger
+      end    
+      item
+        Name = 'Active'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'Path'
+        DataType = ftString
+        Size = 512
+      end    
+      item
+        Name = 'PasName'
+        DataType = ftString
+        Size = 120
+      end>
+    Filtered = True
+    Left = 288
+    Top = 144
+  end
+  object DParams: TBufDataset
+    FieldDefs = <    
+      item
+        Name = 'OperationId'
+        DataType = ftInteger
+      end    
+      item
+        Name = 'Active'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'Name'
+        DataType = ftString
+        Size = 255
+      end    
+      item
+        Name = 'Required'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'In'
+        DataType = ftString
+        Size = 32
+      end    
+      item
+        Name = 'Type'
+        DataType = ftString
+        Size = 32
+      end    
+      item
+        Name = 'Format'
+        DataType = ftString
+        Size = 32
+      end    
+      item
+        Name = 'Reference'
+        DataType = ftString
+        Size = 512
+      end>
+    Filtered = True
+    Left = 368
+    Top = 144
+  end
+  object DResponses: TBufDataset
+    FieldDefs = <    
+      item
+        Name = 'OperationId'
+        DataType = ftInteger
+      end    
+      item
+        Name = 'Active'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'Response'
+        DataType = ftInteger
+      end    
+      item
+        Name = 'Type'
+        DataType = ftString
+        Size = 32
+      end    
+      item
+        Name = 'Format'
+        DataType = ftString
+        Size = 32
+      end    
+      item
+        Name = 'Reference'
+        DataType = ftString
+        Size = 512
+      end    
+      item
+        Name = 'ArrayType'
+        DataType = ftString
+        Size = 32
+      end    
+      item
+        Name = 'ArrayFormat'
+        DataType = ftString
+        Size = 32
+      end    
+      item
+        Name = 'ArrayReference'
+        DataType = ftString
+        Size = 512
+      end    
+      item
+        Name = 'Description'
+        DataType = ftString
+        Size = 255
+      end>
+    Filtered = True
+    Left = 408
+    Top = 144
+  end
+  object DOperations: TBufDataset
+    FieldDefs = <    
+      item
+        Name = 'Id'
+        DataType = ftInteger
+      end    
+      item
+        Name = 'PathId'
+        DataType = ftInteger
+      end    
+      item
+        Name = 'Active'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'Operation'
+        DataType = ftString
+        Size = 32
+      end    
+      item
+        Name = 'Summary'
+        DataType = ftString
+        Size = 512
+      end    
+      item
+        Name = 'OperationId'
+        DataType = ftString
+        Size = 255
+      end>
+    Filtered = True
+    Left = 328
+    Top = 144
+  end
+  object DS_DTags: TDataSource
+    DataSet = DTags
+    OnDataChange = DS_DTagsDataChange
+    Left = 248
+    Top = 192
+  end
+  object DS_DPaths: TDataSource
+    DataSet = DPaths
+    OnDataChange = DS_DPathsDataChange
+    Left = 288
+    Top = 192
+  end
+  object DS_DOperations: TDataSource
+    DataSet = DOperations
+    OnDataChange = DS_DOperationsDataChange
+    Left = 328
+    Top = 192
+  end
+  object DS_DParams: TDataSource
+    DataSet = DParams
+    Left = 368
+    Top = 192
+  end
+  object DS_DResponses: TDataSource
+    DataSet = DResponses
+    Left = 408
+    Top = 192
+  end
+  object SaveDialogProj: TSaveDialog
+    Left = 296
+    Top = 88
+  end
+  object OpenDialogProj: TOpenDialog
+    Left = 328
+    Top = 88
+  end
+end
