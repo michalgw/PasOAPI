@@ -369,7 +369,7 @@ begin
     Result := TJSONNull.Create;
 end;
 
-function MapToVarian(AData: TJSONData; const AType, AFormat: String): Variant;
+function MapToVariant(AData: TJSONData; const AType, AFormat: String): Variant;
 var
   TmpD: TDateTime;
 begin
@@ -495,7 +495,7 @@ begin
       end;
 
       case TiProp.PropertyType.TypeKind of
-        tkVariant: SetVariantProp(Self, TiProp.Name, MapToVarian(AData.Items[I], AttrType, AttrFormat));
+        tkVariant: SetVariantProp(Self, TiProp.Name, MapToVariant(AData.Items[I], AttrType, AttrFormat));
         tkClass: begin
           Value := TiProp.GetValue(Self);
           if Value.IsObject and Assigned(Value.AsObject)
