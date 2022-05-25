@@ -106,14 +106,28 @@ type
     procedure FromJSON(AData: TJSONData);
   end;
 
-  { TPOObjectList }
+  TPOObjectClass = class of TPOObject;
 
-  generic TPOObjectList<T: {TPO}TObject> = class(specialize TObjectList<T>, IPOStreamable)
+  { TPOBaseObjectList }
+
+  TPOBaseObjectList = class(specialize TObjectList<TPOObject>, IPOStreamable)
   public
-    class function CreateItemClass: T;
-    function AddNew: T;
+    class function ItemClass: TPOObjectClass; virtual;
+    function AddNew: TPOObject;
     function ToJSON: TJSONData;
     procedure FromJSON(AJSON: TJSONData);
+  end;
+
+  { TPOObjectList }
+
+  generic TPOObjectList<T: {TPO}TObject> = class(TPOBaseObjectList)
+  private
+    function GetItem(AIndex: SizeInt): T;
+    procedure SetItem(AIndex: SizeInt; const AValue: T);
+  public
+    class function ItemClass: TPOObjectClass; override;
+    function AddNew: T;
+    property Items[AIndex: SizeInt]: T read GetItem write SetItem;
   end;
 
   TPOOperation = (pooGet, pooPost, pooPut, pooDelete);
@@ -133,6 +147,8 @@ type
     function DoRestGet(const APath: String; const AOperation: TPOOperation;
       const ARequest: String; out AResponse: String;
       const AContentType: String; const AHeaders: array of String): Integer; virtual; abstract;
+    procedure DoBeforeRequest; virtual;
+    procedure DoAfterRequest; virtual;
   public
     function RestGet(const APath: String; const AOperation: TPOOperation;
       const ARequest: String; out AResponse: String): Integer;
@@ -162,6 +178,42 @@ implementation
 uses
   TypInfo, RttiUtils, Variants, Rtti, DateUtils, VarUtils, HTTPDefs;
 
+{ TPOBaseObjectList }
+
+class function TPOBaseObjectList.ItemClass: TPOObjectClass;
+begin
+  Result := TPOObject;
+end;
+
+function TPOBaseObjectList.AddNew: TPOObject;
+begin
+  Result := ItemClass.Create;
+end;
+
+function TPOBaseObjectList.ToJSON: TJSONData;
+var
+  El: TPOObject;
+begin
+  Result := TJSONArray.Create;
+  for El in Self do
+    TJSONArray(Result).Add(El.ToJSON);
+end;
+
+procedure TPOBaseObjectList.FromJSON(AJSON: TJSONData);
+var
+  El: TPOObject;
+  I: Integer;
+begin
+  if (not Assigned(AJSON)) or (AJSON.JSONType <> jtArray) then
+    Exit;
+  for I := 0 to TJSONArray(AJSON).Count - 1 do
+  begin
+    El := ItemClass.Create;
+    El.FromJSON(TJSONArray(AJSON).Objects[I]);
+    Add(El);
+  end;
+end;
+
 { TPONameAttribute }
 
 constructor TPONameAttribute.Create(const AValName: String);
@@ -171,14 +223,25 @@ end;
 
 { TPOConnector }
 
+procedure TPOConnector.DoBeforeRequest;
+begin
+  if Assigned(FBeforeRequest) then
+    FBeforeRequest(Self);
+end;
+
+procedure TPOConnector.DoAfterRequest;
+begin
+  if Assigned(FAfterRequest) then
+    FAfterRequest(Self);
+end;
+
 function TPOConnector.RestGet(const APath: String;
   const AOperation: TPOOperation; const ARequest: String; out
   AResponse: String): Integer;
 var
   Headers: array of String = ('accept: application/json');
 begin
-  if Assigned(FBeforeRequest) then
-    FBeforeRequest(Self);
+  DoBeforeRequest;
   if FApiKey <> '' then
     Headers := Concat(Headers, ['Authorization: Bearer' + FApiKey]);
   try
@@ -189,8 +252,7 @@ begin
       if Assigned(FOnError) then
         FOnError(Self, E.Message);
   end;
-  if Assigned(FAfterRequest) then
-    FAfterRequest(Self);
+  DoAfterRequest;
 end;
 
 { TPOModule }
@@ -273,41 +335,24 @@ end;
 
 { TPOObjectList }
 
-class function TPOObjectList.CreateItemClass: T;
-begin
-  Result := T.Create;
-end;
-
 function TPOObjectList.AddNew: T;
 begin
-  Result := CreateItemClass;
-  Add(Result);
+  Result := T(inherited AddNew);
 end;
 
-function TPOObjectList.ToJSON: TJSONData;
-var
-  El: T;
+function TPOObjectList.GetItem(AIndex: SizeInt): T;
 begin
-  Result := TJSONArray.Create;
-  for El in Self do
-    if El is TPOObject then
-      TJSONArray(Result).Add(TPOObject(El).ToJSON);
+  Result := T(inherited Items[AIndex]);
 end;
 
-procedure TPOObjectList.FromJSON(AJSON: TJSONData);
-var
-  El: T;
-  I: Integer;
+procedure TPOObjectList.SetItem(AIndex: SizeInt; const AValue: T);
 begin
-  if (not Assigned(AJSON)) or (AJSON.JSONType <> jtArray) then
-    Exit;
-  for I := 0 to TJSONArray(AJSON).Count - 1 do
-  begin
-    El := T.Create;
-    if El is TPOObject then
-      TPOObject(El).FromJSON(TJSONArray(AJSON).Objects[I]);
-    Add(El);
-  end;
+  inherited Items[AIndex] := AValue;
+end;
+
+class function TPOObjectList.ItemClass: TPOObjectClass;
+begin
+  Result := T;
 end;
 
 { TPOFormatAttribute }
@@ -471,7 +516,6 @@ var
   TiAttr: TCustomAttribute;
   AttrType, AttrFormat: String;
   Value: TValue;
-  ValueName: String;
 begin
   if AData is TJSONObject then
   begin
